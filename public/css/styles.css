@@ -1,0 +1,30 @@
+.name{
+	width: 30%; 
+}
+
+.name_2{
+	width: 60%;
+}
+
+.right{
+	float: right;
+}
+.down_1{
+	margin-top: 1px;
+}
+
+.down{
+	margin-top: 2px;
+}
+
+.tiny{
+	width: 30%;
+}
+
+.bigger{
+	width: 100%;
+}
+
+.cent{
+	text-align: center; 
+}
