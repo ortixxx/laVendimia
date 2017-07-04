@@ -38,7 +38,7 @@
 		</div>
 	</div>	
 	<div class="right">
-		<a href="{{url('/clientes')}}" class="btn btn-danger">Cancelar</a>
+		<a class="btn btn-danger" onclick="exitAlert()">Cancelar</a>
 		<input type="submit" class="btn btn-primary" value="Guardar">
 	</div>
 	</form>
@@ -64,6 +64,20 @@
 				alert('Cadena correcta:' + strCorrecta);
 				return true;
 			}	
+		}
+
+		function exitAlert(){
+			if(confirm('Desea salir de la pantalla actual?')) {
+				window.location = "{{ url('/clientes')}}";
+				return true;
+			} else {
+				if(window.event) {
+					window.event.returnValue = false;
+		      	} else {
+		      		e.preventDefault();
+		      	}
+		      	return false;
+		    }
 		}
 	</script>
 @stop

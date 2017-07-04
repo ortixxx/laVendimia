@@ -38,8 +38,23 @@
 		</div>
 	</div>	
 	<div class="right">
-		<a href="{{url('/articulos')}}" class="btn btn-danger">Cancelar</a>
+		<a class="btn btn-danger" onclick="exitAlert()">Cancelar</a>
 		<input type="submit" class="btn btn-primary" value="Guardar">
 	</div>
 	</form>
+	<script>
+		function exitAlert(){
+			if(confirm('Desea salir de la pantalla actual?')) {
+				window.location = "{{ url('/articulos')}}";
+				return true;
+			} else {
+				if(window.event) {
+					window.event.returnValue = false;
+		      	} else {
+		      		e.preventDefault();
+		      	}
+		      	return false;
+		    }
+		}
+	</script>
 @stop

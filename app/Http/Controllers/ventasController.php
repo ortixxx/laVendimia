@@ -43,6 +43,8 @@ class ventasController extends Controller
     	$id_cliente = $data->id_cliente;
     	$totalContado = $data->totalContado;
     	$totalPlazo = $data->totalPlazo;
+        $lista = $data->input('lista');
+        $cant = $data->input('cant');
     	$tasa = DB::table('regla')
     		->where('id_regla', '=', 1)
     		->get();
@@ -50,7 +52,7 @@ class ventasController extends Controller
     		->orderBy('meses', 'asc')    		
 	        ->get();
 
-    	return view('selectPlazo', compact('ventas', 'id_cliente', 'totalContado', 'totalPlazo', 'tasa', 'plazos'));
+    	return view('selectPlazo', compact('ventas', 'id_cliente', 'totalContado', 'totalPlazo', 'tasa', 'plazos', 'lista', 'cant'));
     }
 
     public function guardar(Request $data){

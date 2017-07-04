@@ -32,15 +32,15 @@
 			        $('#clientes').on('change', function() {
 			            $('#value').val(this.value);
 			            var obj = JSON.parse(this.value);
-			            $('#rfc').val(obj.rfc);
+			            $('#rfc').val("RFC: "+obj.rfc);
 			            $('#id_cliente').val(obj.id);
 			        })
 			    });
 			    </script>
 						
 			</div>
-			<div class="col-md-1 down_9">
-				<input type="text" id="rfc" disabled>
+			<div class="col-md-4">
+				<input class="name_2" type="text" id="rfc" disabled>
 			</div>
 			<br>
 			<br>
@@ -111,7 +111,7 @@
 		</div>
 	</div>	
 	<div class="right">		
-		<a href="{{url('/ventas')}}" class="btn btn-danger">Cancelar</a>
+		<a class="btn btn-danger" onclick="exitAlert()">Cancelar</a>
 		<input type="hidden" name="lista" id="lista" value=""/>
 		<input type="hidden" name="cant" id="cant" value=""/>
 		<input type="submit" class="btn btn-success" value="Siguiente" onclick="lists()">
@@ -120,6 +120,7 @@
 	<script>
 		var rowCount = 0;
 		var lista = [];
+		var id = [];
 		var cant = [];
 		var enganche = 0;
 		var bonificacion = 0;
@@ -134,11 +135,12 @@
 				html += '<tr><td>' + obj.des + '</td><td>' + obj.modelo + '</td><td><input id="number_' + rowCount + '" class="tiny" type="number" min="1" max="' + obj.existencia+ '" value="1" onclick="incrementValue(' + rowCount + ')" onkeypress="incrementValue(' + rowCount + ')"></td><td><input type="text" id="precio_' + rowCount + '" class="cent" value="' + precio + '" disabled></td><td><input type="text" id="importe_' + rowCount + '" class="cent" value="' + precio + '" disabled></td></tr>';
 
 					//Borrar elemento lista.splice(row, 1);
-					//Genera conflictos con el rowCount
+					//Genera conflictos con el rowCount, se debe recrear toda la tabla para evitar problemas de identificacion
 					    	
 				rowCount++;
 				lista.push(articulo.value);
 				cant.push(1);
+				id.push(obj.id);
 				$('#cuenta tbody tr').last().after(html);
 
 				totalFunction();
@@ -184,8 +186,22 @@
 		}
 
 		function lists(){
-			$('#lista').val(lista);
+			$('#lista').val(id);
 			$('#cant').val(cant);
+		}
+
+		function exitAlert(){
+			if(confirm('Desea salir de la pantalla actual?')) {
+				window.location = "{{ url('/ventas')}}";
+				return true;
+			} else {
+				if(window.event) {
+					window.event.returnValue = false;
+		      	} else {
+		      		e.preventDefault();
+		      	}
+		      	return false;
+		    }
 		}
 	</script>
 @stop
